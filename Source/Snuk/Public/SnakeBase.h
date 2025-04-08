@@ -35,6 +35,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	float speedIncrease = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+	float turnSpeed = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	int currentLevel = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
@@ -45,6 +47,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	int foodAmount;
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	APlayerController* pController;
@@ -54,10 +57,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	TSubclassOf<AActor> foodBlueprint;
 
-	void UpdateMouse(FVector2D mousePos, FVector2D screenSize);
+	FVector2D UpdateMouse(FVector2D mousePos, FVector2D screenSize);
 
 	void Move(float deltaTime);
-	virtual void GetDirection();
+	virtual FVector2D GetDirection();
 	virtual bool IsValid();
 
 	UFUNCTION(BlueprintCallable, Category = "Functions")

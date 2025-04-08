@@ -27,22 +27,27 @@ void ASnakeBase::BeginPlay()
 	}
 }
 
+
 // Called every frame
 void ASnakeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	
-
+	FVector2D target;
 	if (IsValid())
 	{
-		GetDirection();
+		target = GetDirection();
 	}
 	else
 	{
-		direction = { 1,0 };
+		target = { 1,0 };
 	}
+	FVector temp;
 
+	temp = FMath::VInterpConstantTo(FVector{ direction.X, direction.Y, 0 }, FVector{ target.X, target.Y, 0}, DeltaTime, turnSpeed);;
+	direction = { temp.X, temp.Y };
+	direction.Normalize();
 	Move(DeltaTime);
 }
 
@@ -52,17 +57,18 @@ void ASnakeBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-void ASnakeBase::UpdateMouse(FVector2D mousePos, FVector2D screenSize)
+FVector2D ASnakeBase::UpdateMouse(FVector2D mousePos, FVector2D screenSize)
 {
 	FVector2D half = screenSize / 2.0;
+	FVector2D target = mousePos - half;;
+	target.Normalize();
+	if (target == FVector2D{ 0,0 })
+		target = FVector2D{ 0,1 };
 
-	direction = mousePos - half;
-	direction.Normalize();
-	if (direction == FVector2D{ 0,0 })
-		direction = FVector2D{ 0,1 };
+	return target;
 }
 
-void ASnakeBase::GetDirection()
+FVector2D ASnakeBase::GetDirection()
 {
 	float mouseX;
 	float mouseY;
@@ -70,7 +76,7 @@ void ASnakeBase::GetDirection()
 	int viewY;
 	pController->GetViewportSize(viewX, viewY);
 	pController->GetMousePosition(mouseX, mouseY);
-	UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY });
+	return UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY });
 }
 bool ASnakeBase::IsValid()
 {
