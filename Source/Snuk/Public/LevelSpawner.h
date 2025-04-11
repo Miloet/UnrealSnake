@@ -26,33 +26,37 @@ public:
 
 	class LevelLayout
 	{
+		public:
 		const char empty = '0';
 		const char full = '1';
 
+		static const std::string FullRow;
+		static const std::string BlockedRow;
+
 		const std::vector<std::string> walls ={
-			"11111111111111111111",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
+			FullRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
 
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
 
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
 
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"10000000000000000001",
-			"11111111111111111111"
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			BlockedRow,
+			FullRow
 		};
 
 
@@ -60,7 +64,7 @@ public:
 		{
 
 		};
-		public:
+		
 		bool GetValue(int x, int y);
 
 		LevelLayout(std::vector<std::string> values) : level(values) {}
