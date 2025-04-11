@@ -15,7 +15,6 @@ AFood::AFood()
 void AFood::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -29,7 +28,7 @@ void AFood::SpawnFood()
 {
 	FTransform trans = GetActorTransform();
 
-	FVector pos = { FMath::RandRange(-range, range), FMath::RandRange(-range, range), 100};
+	FVector pos = { FMath::RandRange(-area, area), FMath::RandRange(-area, area), 100};
 
 	trans.SetLocation(pos);
 

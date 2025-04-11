@@ -15,8 +15,8 @@ public:
 	// Sets default values for this actor's properties
 	AFood();
 
-	UPROPERTY(EditAnywhere, Category = "Value")
-	float range = 5000;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+	float area = 5000;
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnFood();
