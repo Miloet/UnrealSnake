@@ -61,6 +61,7 @@ public:
 
 	void Move(float deltaTime);
 	virtual FVector2D GetDirection();
+	virtual FVector2D GetDirectionAI();
 	virtual bool IsValid();
 
 	UFUNCTION(BlueprintCallable, Category = "Functions")

@@ -41,7 +41,7 @@ void ASnakeBase::Tick(float DeltaTime)
 	}
 	else
 	{
-		target = { 1,0 };
+		target = GetDirectionAI();
 	}
 	FVector temp;
 
@@ -77,6 +77,11 @@ FVector2D ASnakeBase::GetDirection()
 	pController->GetViewportSize(viewX, viewY);
 	pController->GetMousePosition(mouseX, mouseY);
 	return UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY });
+}
+
+FVector2D ASnakeBase::GetDirectionAI()
+{
+	return { 0,0 };
 }
 bool ASnakeBase::IsValid()
 {
