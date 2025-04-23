@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "SnakeTail.h"
 #include "SnakeBase.h"
+#include "SnakeTail.h"
 #include "Food.h"
 
 // Sets default values
@@ -38,6 +38,7 @@ void ASnakeBase::Tick(float DeltaTime)
 	if (IsValid())
 	{
 		target = GetDirection();
+		target = FVector2D{target.Y, -target.X };
 	}
 	else
 	{
@@ -45,7 +46,7 @@ void ASnakeBase::Tick(float DeltaTime)
 	}
 	FVector temp;
 
-	temp = FMath::VInterpConstantTo(FVector{ direction.X, direction.Y, 0 }, FVector{ target.X, target.Y, 0}, DeltaTime, turnSpeed);;
+	temp = FMath::VInterpConstantTo(FVector{ direction.X, direction.Y, 0 }, FVector{ target.X, target.Y, 0}, DeltaTime, turnSpeed);
 	direction = { temp.X, temp.Y };
 	direction.Normalize();
 	Move(DeltaTime);
@@ -81,7 +82,7 @@ FVector2D ASnakeBase::GetDirection()
 
 FVector2D ASnakeBase::GetDirectionAI()
 {
-	return { 0,0 };
+	return aiDirection;
 }
 bool ASnakeBase::IsValid()
 {
@@ -92,7 +93,7 @@ void ASnakeBase::Move(float deltaTime)
 {
 	FTransform trans = GetActorTransform();
 
-	trans.SetLocation(trans.GetLocation() + (FVector{ direction.Y, -direction.X, 0} * deltaTime * speed));
+	trans.SetLocation(trans.GetLocation() + (FVector{ direction.X, direction.Y, 0} * deltaTime * speed));
 
 	SetActorTransform(trans);
 }
@@ -104,8 +105,12 @@ void ASnakeBase::SpawnTail()
 	FTransform trans;
 
 	if (lastTail == nullptr)
+	{
 		trans = GetActorTransform();
+		trans.SetLocation(trans.GetLocation() + FVector{0,300,0});
+	}
 	else 
+
 		trans = lastTail->GetActorTransform();
 
 	AActor* t = GetWorld()->SpawnActor<AActor>(tailBlueprint, trans, SpawnInfo);

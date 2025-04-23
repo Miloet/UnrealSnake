@@ -1,9 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
 #include "SnakeBase.generated.h"
 
 UCLASS()
@@ -56,6 +55,9 @@ public:
 	TSubclassOf<AActor> tailBlueprint;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	TSubclassOf<AActor> foodBlueprint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+	FVector2D aiDirection;
 
 	FVector2D UpdateMouse(FVector2D mousePos, FVector2D screenSize);
 
