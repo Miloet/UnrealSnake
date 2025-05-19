@@ -52,6 +52,8 @@ public:
 	APlayerController* pController;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+	bool isPlayerOne;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	TSubclassOf<AActor> tailBlueprint;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
 	TSubclassOf<AActor> foodBlueprint;
@@ -60,7 +62,9 @@ public:
 	FVector2D aiDirection;
 
 	FVector2D UpdateMouse(FVector2D mousePos, FVector2D screenSize);
-
+	FVector2D UpdateKeys();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+	FVector2D keyboardDirection;
 	void Move(float deltaTime);
 	virtual FVector2D GetDirection();
 	virtual FVector2D GetDirectionAI();

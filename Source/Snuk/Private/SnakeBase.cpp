@@ -68,7 +68,11 @@ FVector2D ASnakeBase::UpdateMouse(FVector2D mousePos, FVector2D screenSize)
 
 	return target;
 }
-
+FVector2D ASnakeBase::UpdateKeys()
+{
+	FVector2D out = keyboardDirection.GetSafeNormal();
+	return out;
+}
 FVector2D ASnakeBase::GetDirection()
 {
 	float mouseX;
@@ -77,7 +81,7 @@ FVector2D ASnakeBase::GetDirection()
 	int viewY;
 	pController->GetViewportSize(viewX, viewY);
 	pController->GetMousePosition(mouseX, mouseY);
-	return UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY });
+	return isPlayerOne ? UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY }) : UpdateKeys();
 }
 
 FVector2D ASnakeBase::GetDirectionAI()
