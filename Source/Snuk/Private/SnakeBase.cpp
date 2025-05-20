@@ -83,7 +83,6 @@ FVector2D ASnakeBase::GetDirection()
 	pController->GetMousePosition(mouseX, mouseY);
 	return isPlayerOne ? UpdateMouse({ mouseX,mouseY }, { (float)viewX, (float)viewY }) : UpdateKeys();
 }
-
 FVector2D ASnakeBase::GetDirectionAI()
 {
 	return aiDirection;

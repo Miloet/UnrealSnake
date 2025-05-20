@@ -49,6 +49,7 @@ public:
 	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
+
 	APlayerController* pController;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Value")
